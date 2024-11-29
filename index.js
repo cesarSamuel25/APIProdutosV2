@@ -1,12 +1,8 @@
 const express = require('express');
-const server = express();
-server.use(express.json());
 const { MongoClient, ObjectId } = require('mongodb');
 
-server.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-});
+const server = express();
+server.use(express.json());
 
 // Dados mongoDB
 const url = 'mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/';
