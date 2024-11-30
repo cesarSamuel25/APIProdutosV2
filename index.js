@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
+const fs = require('fs');
+
 
 const server = express();
 server.use(express.json());
@@ -14,10 +16,12 @@ const corsOption = {
 server.use(cors(corsOption));
 
 // Dados mongoDB
-const url = 'mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/';
+const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'))
+const url = config.dbConnectionString;
+
 const client = new MongoClient(url);
-const dbName = "ProjetoFullStack";
-const collectionName = "Produtos";
+const dbName = config.dbName;
+const collectionName = config.collectionName;
 
 //READ TOTAL
 server.get('/produtos', async (req, res) => {
@@ -86,7 +90,7 @@ server.get('/produtos/:desc', async (req, res) => {
 
 //POST
 server.post('/produtos', async (req, res) => {
-  console.log(req.body);
+  console.log(req.body)
   const body = req.body;
 
   try{
@@ -168,5 +172,6 @@ server.delete('/produtos/:desc', async (req, res) => {
     console.log("Conexão ao servidor MongoDB Encerrada!")
   }
 });
+
 
 server.listen(3333);
