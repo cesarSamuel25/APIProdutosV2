@@ -86,6 +86,7 @@ server.get('/produtos/:desc', async (req, res) => {
 
 //POST
 server.post('/produtos', async (req, res) => {
+  console.log(req.body);
   const body = req.body;
 
   try{
