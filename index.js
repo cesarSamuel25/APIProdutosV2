@@ -9,6 +9,8 @@ server.use((req, res, next) => {
   next();
 });
 
+app.use(cors({ methods: ['POST', 'GET', 'DELETE', 'PATCH'] }));
+
 // Dados mongoDB
 const url = 'mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/';
 const client = new MongoClient(url);
