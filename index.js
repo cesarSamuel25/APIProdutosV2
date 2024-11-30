@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const server = express();
 server.use(express.json());
+server.use(cors({origin:'*'}));
 
 // Dados mongoDB
 const url = 'mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/';
