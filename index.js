@@ -1,10 +1,17 @@
 const express = require('express');
-const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const server = express();
 server.use(express.json());
-server.use(cors({origin:'*'}));
+
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+server.use(cors(corsOptions));
 
 // Dados mongoDB
 const url = 'mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/';
