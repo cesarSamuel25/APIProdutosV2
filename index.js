@@ -16,7 +16,8 @@ const corsOption = {
 server.use(cors(corsOption));
 
 // Dados mongoDB
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'))
+const configPath = path.join(__dirname, 'config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
 const url = config.dbConnectionString;
 
 const client = new MongoClient(url);
