@@ -7,10 +7,10 @@ server.use(express.json());
 
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-
-server.use(cors({ methods: ['POST', 'GET', 'DELETE', 'PATCH'] }));
 
 // Dados mongoDB
 const url = 'mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/';
