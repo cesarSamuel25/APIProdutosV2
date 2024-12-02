@@ -163,6 +163,8 @@ server.delete('/produtos/:desc', async (req, res) => {
     const collection = db.collection(collectionName);
 
     const result = await collection.deleteOne({descricao: desc});
+
+    res.send("Produto deletado com sucesso!")
     
   }catch (err) {
     console.log('Erro ao remover produtos', err)
