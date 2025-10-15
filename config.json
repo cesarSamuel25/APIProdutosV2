@@ -1,5 +1,5 @@
 {
-  "dbConnectionString": "mongodb+srv://samuelscesar:086251sa@cluster-samuel.hdfkp.mongodb.net/",
+  "dbConnectionString": "mongodb+srv://samuelscesar:samuelscesar@cluster-samuel.hdfkp.mongodb.net/",
   "dbName": "ProjetoFullStack",
   "collectionName": "Produtos"
 }
