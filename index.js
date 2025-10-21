@@ -151,9 +151,10 @@ server.patch('/produtos/:desc', async (req, res) => {
   }  
 })
 
-//DELETE
+// DELETE
 server.delete('/produtos/:id', async (req, res) => {
-  const desc = req.params.id;
+  // 1. Pegue o ID da URL (ele está como string)
+  const idString = req.params.id; 
 
   try{
     await client.connect();
@@ -161,17 +162,21 @@ server.delete('/produtos/:id', async (req, res) => {
 
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
-
-    const result = await collection.deleteOne({_id: id});
-
-    res.send("Produto deletado com sucesso!")
     
+    // 2. Converta a string do ID para um ObjectId do MongoDB
+    const id = new ObjectId(idString); 
+
+    const result = await collection.deleteOne({ _id: id }); // Use o ObjectId
+
+    if (result.deletedCount === 0) {
+        res.status(404).send("Produto não encontrado.");
+    } else {
+        res.send("Produto deletado com sucesso!");
+    }
   }catch (err) {
     console.log('Erro ao remover produtos', err)
-    return 'Erro ao remover produtos'   
-    
+    res.status(500).send('Erro ao remover produtos');
   } finally {
-
     await client.close()
     console.log("Conexão ao servidor MongoDB Encerrada!")
   }
