@@ -152,8 +152,8 @@ server.patch('/produtos/:desc', async (req, res) => {
 })
 
 //DELETE
-server.delete('/produtos/:desc', async (req, res) => {
-  const desc = req.params.desc;
+server.delete('/produtos/:id', async (req, res) => {
+  const desc = req.params.id;
 
   try{
     await client.connect();
@@ -162,7 +162,7 @@ server.delete('/produtos/:desc', async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
-    const result = await collection.deleteOne({descricao: desc});
+    const result = await collection.deleteOne({_id: id});
 
     res.send("Produto deletado com sucesso!")
     
