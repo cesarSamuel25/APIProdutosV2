@@ -118,9 +118,11 @@ server.post('/produtos', async (req, res) => {
 })
 
 //UPDATE
-server.patch('/produtos/:desc', async (req, res) => {
-  const desc = req.params.desc;
+server.patch('/produtos/:id', async (req, res) => {
+  const desc = req.params.id;
   const body = req.body;
+
+  const id = new ObjectId(idString); 
 
   try{
     await client.connect();
@@ -130,7 +132,7 @@ server.patch('/produtos/:desc', async (req, res) => {
     const collection = db.collection(collectionName);
 
     const result = await collection.updateOne(
-      {descricao: desc},
+      {_id: id},
       {$set: body}
     );
 
