@@ -119,7 +119,7 @@ server.post('/produtos', async (req, res) => {
 
 //UPDATE
 server.patch('/produtos/:id', async (req, res) => {
-  const desc = req.params.id;
+  const idString = req.params.id;
   const body = req.body;
 
   const id = new ObjectId(idString); 
