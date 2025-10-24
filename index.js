@@ -133,8 +133,7 @@ server.patch('/produtos/:id', async (req, res) => {
 
     const result = await collection.updateOne(
       {_id: id},
-      {$set: body},
-      { new: true }
+      {$set: body}
     );
 
     if (result.matchedCount === 0){ 
