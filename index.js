@@ -60,6 +60,40 @@ server.get('/produtos', async (req, res) => {
   }
 });
 
+server.get('/relatorio', async (req, res) => {
+
+  try{
+    await client.connect();
+    console.log("Conectado ao banco de dados.");
+
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+
+    const produtos = await collection.find({}).sort({ validade: 1 }).toArray();
+
+    let arrayProdutos = [];
+
+    for(let i = 0; i < produtos.length; i++){
+      arrayProdutos[i] = produtos[i];
+    }
+
+    console.log("Produtos encontrados:")
+    console.log(arrayProdutos);
+
+    const jsonProdutos = JSON.stringify(arrayProdutos, null, 2);
+    res.send(jsonProdutos);   
+
+  } catch (err) {
+    console.log('Erro ao consultar produtos', err)
+    return 'Erro ao consultar produtos'   
+    
+  } finally {
+
+    await client.close()
+    console.log("Conexão ao servidor MongoDB Encerrada!")
+  }
+});
+
 //READ UNICO
 server.get('/produtos/:desc', async (req, res) => {
   const desc = req.params.desc;
